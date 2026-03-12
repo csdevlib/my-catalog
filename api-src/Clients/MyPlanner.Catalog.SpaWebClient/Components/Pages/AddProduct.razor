@@ -1,0 +1,59 @@
+﻿@page "/products/add"
+
+@using Microsoft.AspNetCore.Components.Forms;
+
+@inject NavigationManager NavigationManager;
+
+<h3>Add Product</h3>
+
+<EditForm Model="@product" OnValidSubmit="Submit" FormName="FormAddProduct">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText id="TenantId" @bind-Value="product.TenantId" />
+    
+    <InputText id="Name" @bind-Value="product.Name" />
+    <ValidationMessage For="@(() => product.Name)" />
+
+    <InputText id="Description" @bind-Value="product.Description" />
+    <InputSelect @bind-Value="@product.CurrencyValue">
+        @foreach (var currency in Enum.GetValues(typeof(eCurrency)))
+        {
+            <option value="@currency">@currency</option>
+        }
+    </InputSelect>
+    <InputNumber id="CommercialValue" @bind-Value="product.CommercialValue" />
+    
+    <InputSelect id="Category" @bind-Value="product.Category" multiple="true">
+        @foreach (var category in Enum.GetValues(typeof(eProductCategory)))
+        {
+            <option value="@category">@category</option>
+        }
+   </InputSelect>
+    
+    <InputFile id="ImageFile" @bind-Value="product.ImageFile" />
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/products" class="btn btn-link">Cancel</a>
+
+    <br />
+    </EditForm> 
+
+@code {
+
+    [SupplyParameterFromForm(FormName = "FormAddProduct")]
+    private Product product { set; get; } = new Product() { Id = Guid.NewGuid().ToString(), Status = 1};
+
+    private void Submit()
+    {
+        if (product == null)
+        {
+            return;
+        };
+
+        ProductsRepository.AddProduct(product);
+        NavigationManager.NavigateTo("/products");
+    }
+}

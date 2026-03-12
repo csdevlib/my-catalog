@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Services", "2. Services", "{28D40F22-A67D-42AC-9FA3-5DA37C99857C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. BuildingBlocks", "3. BuildingBlocks", "{0C9501DC-CEEB-4C19-8390-5C30F157BA0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPlanner.Catalog.Api", "Services\MyPlanner.Catalog.Api\MyPlanner.Catalog.Api.csproj", "{017C74C1-A5F9-470B-AD20-205CEE3F16BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCatalog.Shared", "BuildingBlocks\MyCatalog.Shared\MyCatalog.Shared.csproj", "{4D088D0B-FF5B-49EE-86EB-8C94453B0597}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Client", "1. Client", "{18375420-D9C7-4E0A-A1DE-001CD2797B2E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPlanner.Catalog.SpaWebClient", "Clients\MyPlanner.Catalog.SpaWebClient\MyPlanner.Catalog.SpaWebClient.csproj", "{23433A14-FEE4-4153-9E61-FC1F44182C2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{017C74C1-A5F9-470B-AD20-205CEE3F16BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{017C74C1-A5F9-470B-AD20-205CEE3F16BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{017C74C1-A5F9-470B-AD20-205CEE3F16BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{017C74C1-A5F9-470B-AD20-205CEE3F16BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D088D0B-FF5B-49EE-86EB-8C94453B0597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D088D0B-FF5B-49EE-86EB-8C94453B0597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D088D0B-FF5B-49EE-86EB-8C94453B0597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D088D0B-FF5B-49EE-86EB-8C94453B0597}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23433A14-FEE4-4153-9E61-FC1F44182C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23433A14-FEE4-4153-9E61-FC1F44182C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23433A14-FEE4-4153-9E61-FC1F44182C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23433A14-FEE4-4153-9E61-FC1F44182C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{017C74C1-A5F9-470B-AD20-205CEE3F16BA} = {28D40F22-A67D-42AC-9FA3-5DA37C99857C}
+		{4D088D0B-FF5B-49EE-86EB-8C94453B0597} = {0C9501DC-CEEB-4C19-8390-5C30F157BA0E}
+		{23433A14-FEE4-4153-9E61-FC1F44182C2E} = {18375420-D9C7-4E0A-A1DE-001CD2797B2E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B06B18A-90F4-484C-A582-B128D0034455}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,31 @@
+﻿<div class="input-group mb-3">
+    <input type="text" 
+           class="form-control" 
+           placeholder="Search Products..." 
+           @bind-value="this.productFilter" 
+           @bind-value:event="oninput" />
+
+    <button class="btn btn-primary" 
+            type="button" 
+            id="button-search" 
+            @onclick="HandleSearching">Search</button>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public EventCallback<string> SearchProductCallback { get; set; }
+
+    private string productFilter = string.Empty;
+
+    public void ClearFilter()
+    {
+        this.productFilter = string.Empty;
+    }
+
+    private async void HandleSearching()
+    {       
+        await SearchProductCallback.InvokeAsync(productFilter);             
+    }
+}

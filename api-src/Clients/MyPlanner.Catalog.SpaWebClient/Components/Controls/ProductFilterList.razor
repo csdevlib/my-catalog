@@ -1,0 +1,35 @@
+﻿@if (categories != null && categories.Count > 0)
+{
+    <div class="container-fluid text-center">
+        <div class="row w-50">
+            @foreach (var category in categories)
+            {
+                <ProductFilterListItem categorySelected="@categorySelected"
+                    category="@category"
+                    CategorySelectedCallback="HandleCategorySelected" />
+            }
+        </div>
+    </div>
+}
+
+@code {
+    private List<string> categories = Enum.GetValues(typeof(eProductCategory)).Cast<eProductCategory>().Select(c => c.ToString()).ToList();
+
+    [Parameter]
+    public string categorySelected { get; set; } = "";
+
+    [Parameter]
+    public EventCallback<string> CategorySelectedCallback { get; set; }
+
+    private async void HandleCategorySelected(string category)
+    {
+        this.categorySelected = category;
+
+        await CategorySelectedCallback.InvokeAsync(category);
+    }
+
+    public void ClearFilter()
+    {
+        this.categorySelected = string.Empty;
+    }
+}

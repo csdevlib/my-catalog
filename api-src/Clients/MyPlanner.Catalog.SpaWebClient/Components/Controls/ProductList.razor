@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+@inject NavigationManager NavigationManager
+
+@if (this.products != null && this.products.Any())
+{
+    <ul>
+        <Virtualize Items="products" Context="product">
+            <ProductListItem product="product" />
+        </Virtualize>
+    </ul>
+}
+
+@code {
+
+    [Parameter]
+    public string? CategorySelected { get; set; }
+
+    [Parameter]
+    public string? SearchFilter { get; set; }
+
+    private List<Product> products = new List<Product>();
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrWhiteSpace(this.SearchFilter))
+        {
+            products = ProductsRepository.GetProductsByCategory(CategorySelected!);
+        }
+        else
+        {
+            products = ProductsRepository.SearchProducts(SearchFilter!);
+        }
+    }
+}

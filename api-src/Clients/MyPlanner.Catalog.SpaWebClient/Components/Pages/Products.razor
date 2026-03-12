@@ -1,0 +1,51 @@
+﻿@page "/products"  
+
+@using Microsoft.AspNetCore.Components.Forms
+
+@rendermode InteractiveServer
+
+@inject NavigationManager NavigationManager;
+
+<h3>Product List</h3>
+
+<ProductFilterList 
+    @ref="productFilterList"
+    categorySelected="@this.categorySelected" 
+    CategorySelectedCallback="HandleCategorySelection" />
+
+<ProductSearchBar 
+    @ref="productSearchBar"
+    SearchProductCallback="HandleSearchProduct" /> 
+
+<ProductList 
+    SearchFilter="@this.searchFilter"
+    CategorySelected="@this.categorySelected" />
+
+<p>
+    <a href="/products/add" class="btn btn-primary">Add Product</a>
+</p>
+
+@code {
+    private string categorySelected = string.Empty;
+
+    private string searchFilter = string.Empty;
+
+    private ProductSearchBar? productSearchBar;
+
+    private ProductFilterList? productFilterList;
+
+    private void HandleCategorySelection(string category)
+    {
+        this.categorySelected = category;
+        this.searchFilter = string.Empty;
+
+        productSearchBar!.ClearFilter();
+    } 
+
+    private void HandleSearchProduct(string searchFilter)
+    {
+        this.searchFilter = searchFilter;
+
+        productFilterList!.ClearFilter();
+    }
+}

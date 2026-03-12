@@ -1,0 +1,27 @@
+﻿
+<div class="col" >
+    <button type="button"
+            style="background-color:@(this.category == categorySelected ? "red": "gray")"
+            @onclick="@(async () => { OnCategorySelecting(category); })">
+        @category
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public string categorySelected { get; set; } = "";
+
+    [Parameter]
+    public string category { get; set; } = "";
+
+    [Parameter]
+    public EventCallback<string> CategorySelectedCallback { get; set; }
+
+    
+    private async void OnCategorySelecting(string category)
+    {
+        this.categorySelected = category;       
+
+        await CategorySelectedCallback.InvokeAsync(category);
+    }
+}

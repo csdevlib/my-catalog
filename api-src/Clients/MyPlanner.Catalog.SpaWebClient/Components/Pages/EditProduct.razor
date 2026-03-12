@@ -1,0 +1,88 @@
+﻿@page "/products/{id}"
+@using Microsoft.AspNetCore.Components.Forms
+@inject NavigationManager Navigation
+
+<h3>Edit Product</h3>
+
+@if (product != null)
+{
+    <EditForm Model="@product" FormName="formProduct" OnValidSubmit="Submit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <InputText id="Id" @bind-Value="product.Id" hidden />
+
+        <div class="form-group">
+
+            <label for="TenantId">TenantId</label>
+            <InputText id="TenantId" class="form-control" @bind-Value="product.TenantId" disabled="true" />
+                        
+            <label for="Name">Name</label>
+            <InputText id="Name" class="form-control" @bind-Value="product.Name" />
+
+            <div class="col">
+                <ValidationMessage For="@(() => product.Name)" />
+            </div>
+            
+            <label for="Description">Description</label>
+            <InputText id="Description" class="form-control" @bind-Value="product.Description" />
+            
+            <label for="CommercialValue">CommercialValue</label>
+            <InputSelect @bind-Value="@product.CurrencyValue">
+                @foreach (var currency in Enum.GetValues(typeof(eCurrency)))
+                {
+
+                    <option value="@currency">@currency</option>
+                }
+            </InputSelect>
+            <InputNumber id="CommercialValue" class="form-control" @bind-Value="product.CommercialValue" />
+
+            <label for="Category">Category</label>
+            <InputSelect id="Category" class="form-control" @bind-Value="product.Category" multiple="true">
+                @foreach (var category in Enum.GetValues(typeof(eProductCategory)))
+                {
+                    <option value="@category">@category</option>
+                }
+           </InputSelect>
+
+            
+             <label for="ImageFile">ImageFile</label>
+             <InputFile id="ImageFile" class="form-control" @bind-Value="product.ImageFile" />
+
+            <br />
+
+            <a href="/products" class="btn btn-link">Cancel</a>
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a href="/products" class="btn btn-link">Back to list</a>
+
+            <br />
+
+            <ValidationMessage For="@(() => product.Name)" />
+        </div>
+   </EditForm> 
+}
+<br />
+
+@code {
+
+    [Parameter]
+    public string? Id { get; set; }
+
+    [SupplyParameterFromForm(FormName = "formProduct")]
+    private Product? product { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        product ??= ProductsRepository.GetProductById(Id!);
+    }
+
+    private void Submit()
+    {
+        if (product!= null)
+        {
+            ProductsRepository.UpdateProduct(product.Id, product);
+        };
+
+        //Navigation.NavigateTo("/products", true);
+    }
+}
